@@ -7,14 +7,15 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "user_reviews")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String msg;
     @ManyToOne
-    private Job job;
-    private boolean like;
+    private Job reviewedJob;
+    private boolean likes;
     @CreationTimestamp
     private LocalDateTime regDate;
     @UpdateTimestamp
@@ -22,10 +23,10 @@ public class Review {
 
     protected Review(){}
 
-    public Review(String msg, Job job, boolean like) {
+    public Review(String msg, Job reviewedJob, boolean like) {
         this.msg = msg;
-        this.job = job;
-        this.like = like;
+        this.reviewedJob = reviewedJob;
+        this.likes = like;
     }
 
     public long getId() {
@@ -40,20 +41,20 @@ public class Review {
         this.msg = msg;
     }
 
-    public Job getJob() {
-        return job;
+    public Job getReviewedJob() {
+        return reviewedJob;
     }
 
-    public void setJob(Job job) {
-        this.job = job;
+    public void setReviewedJob(Job reviewedJob) {
+        this.reviewedJob = reviewedJob;
     }
 
     public boolean isLike() {
-        return like;
+        return likes;
     }
 
     public void setLike(boolean like) {
-        this.like = like;
+        this.likes = like;
     }
 
     public LocalDateTime getRegDate() {

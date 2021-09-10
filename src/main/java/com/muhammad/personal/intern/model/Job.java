@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "jobs")
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +27,6 @@ public class Job {
     private Company company;
     private String jobCriteria;
     private String jobDescription;
-    @NotNull
     private int numOfCandidatesRequired;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -54,7 +54,7 @@ public class Job {
     protected Job(){}
 
     public Job(String title, List<Skill> skillSet, Company company, String jobCriteria, String jobDescription,
-               @NotNull int numOfCandidatesRequired, List<Review> reviews, User recruiter, String status,
+               int numOfCandidatesRequired, List<Review> reviews, User recruiter, String status,
                Date applicationEndDate, List<Application> applicants) {
         this.title = title;
         this.skillSet = skillSet;

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "students")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,9 +26,9 @@ public class Student {
     private String mobile;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "student_skill",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_id")
+            name = "students_skillset",
+            joinColumns = @JoinColumn(name = "students_id"),
+            inverseJoinColumns = @JoinColumn(name = "skillset_id")
     )
     private List<Skill> skills;
     @ManyToOne

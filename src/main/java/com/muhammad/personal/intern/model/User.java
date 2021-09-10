@@ -10,22 +10,20 @@ import java.util.List;
 
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String name;
-    @NotNull
-    @Column(unique = true)
     private String username;
+    @Column(unique = true)
+    private String email;
     private String password;
-    @NotNull
     @ManyToMany(fetch =  FetchType.EAGER)
     @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id")
     )
     private List<Role> roles;
     private boolean isActive;
@@ -39,10 +37,10 @@ public class User {
 
     }
 
-    public User(String name,String username, String password, List<Role> roles,
+    public User(String username,String email, String password, List<Role> roles,
                 boolean isActive, boolean emailNotification){
-        this.name = name;
         this.username = username;
+        this.email = email;
         this.password = password;
         this.roles = roles;
         this.isActive = isActive;
@@ -53,12 +51,12 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {
