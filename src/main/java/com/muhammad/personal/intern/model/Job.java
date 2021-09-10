@@ -1,10 +1,10 @@
 package com.muhammad.personal.intern.model;
 
+import com.muhammad.personal.intern.model.enums.Status;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -28,16 +28,9 @@ public class Job {
     private String jobCriteria;
     private String jobDescription;
     private int numOfCandidatesRequired;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "job_reviews",
-            joinColumns = @JoinColumn(name = "job_reviews"),
-            inverseJoinColumns = @JoinColumn(name = "reviews_id")
-    )
-    private List<Review> reviews;
     @ManyToOne
     private User recruiter;
-    private String status;
+    private Status status;
     private Date applicationEndDate;
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -54,7 +47,7 @@ public class Job {
     protected Job(){}
 
     public Job(String title, List<Skill> skillSet, Company company, String jobCriteria, String jobDescription,
-               int numOfCandidatesRequired, List<Review> reviews, User recruiter, String status,
+               int numOfCandidatesRequired,User recruiter, Status status,
                Date applicationEndDate, List<Application> applicants) {
         this.title = title;
         this.skillSet = skillSet;
@@ -62,7 +55,6 @@ public class Job {
         this.jobCriteria = jobCriteria;
         this.jobDescription = jobDescription;
         this.numOfCandidatesRequired = numOfCandidatesRequired;
-        this.reviews = reviews;
         this.recruiter = recruiter;
         this.status = status;
         this.applicationEndDate = applicationEndDate;
@@ -121,14 +113,6 @@ public class Job {
         this.numOfCandidatesRequired = numOfCandidatesRequired;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
     public User getRecruiter() {
         return recruiter;
     }
@@ -137,11 +121,11 @@ public class Job {
         this.recruiter = recruiter;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -14,7 +14,7 @@ public class Notification {
     private long id;
     private Request requestType;
     @OneToOne
-    private User user;// use company to distinguish at frontend
+    private User performer;// use company to distinguish at frontend
     @OneToOne
     private User approvedBy;
     @CreationTimestamp
@@ -24,9 +24,14 @@ public class Notification {
 
     protected Notification(){}
 
+    public Notification(Request requestType, User performer) {
+        this.requestType = requestType;
+        this.performer = performer;
+    }
+
     public Notification(Request requestType, User user, User approvedBy) {
         this.requestType = requestType;
-        this.user = user;
+        this.performer = user;
         this.approvedBy = approvedBy;
     }
 
@@ -42,12 +47,12 @@ public class Notification {
         this.requestType = requestType;
     }
 
-    public User getUser() {
-        return user;
+    public User getPerformer() {
+        return performer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPerformer(User user) {
+        this.performer = user;
     }
 
     public User getApprovedBy() {

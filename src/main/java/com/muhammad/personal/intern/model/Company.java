@@ -25,8 +25,6 @@ public class Company {
 
     )
     private List<User> users;
-    @OneToMany
-    private List<Review> reviews;
     private boolean isApproved;
     @CreationTimestamp
     public LocalDateTime dateCreated;
@@ -36,13 +34,12 @@ public class Company {
     protected Company(){}
 
     public Company(String name, String webUrl, String description, Date establishmentDate, List<User> users,
-                   List<Review> reviews, boolean isApproved) {
+                    boolean isApproved) {
         this.name = name;
         this.webUrl = webUrl;
         this.description = description;
         this.establishmentDate = establishmentDate;
         this.users = users;
-        this.reviews = reviews;
         this.isApproved = isApproved;
     }
 
@@ -88,14 +85,6 @@ public class Company {
 
     public void setUsers(List<User> users) {
         this.users = users;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
     }
 
     public boolean isApproved() {

@@ -36,8 +36,6 @@ public class Student {
     private Degree degree;
     @Column(length = 1024)
     private String imageUrl;
-    @OneToMany
-    private List<Review> reviews;
     private boolean isApproved;
     @CreationTimestamp
     public LocalDateTime dateCreated;
@@ -47,7 +45,7 @@ public class Student {
     protected Student(){}
 
     public Student(User user, String firstName, String lastName, String email, Date dob, char gender, String mobile,
-                   List<Skill> skills, Institution institution, Degree degree, String imageUrl, List<Review> reviews,
+                   List<Skill> skills, Institution institution, Degree degree, String imageUrl,
                    boolean isApproved) {
         this.user = user;
         this.firstName = firstName;
@@ -60,7 +58,6 @@ public class Student {
         this.institution = institution;
         this.degree = degree;
         this.imageUrl = imageUrl;
-        this.reviews = reviews;
         this.isApproved = isApproved;
     }
 
@@ -157,14 +154,6 @@ public class Student {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
     }
 
     public boolean isApproved() {

@@ -16,6 +16,12 @@ public class Review {
     @ManyToOne
     private Job reviewedJob;
     private boolean likes;
+    @ManyToOne
+    private Company company;
+    @ManyToOne
+    private Student student;
+    @OneToOne
+    private User reviewer;
     @CreationTimestamp
     private LocalDateTime regDate;
     @UpdateTimestamp
@@ -23,10 +29,19 @@ public class Review {
 
     protected Review(){}
 
-    public Review(String msg, Job reviewedJob, boolean like) {
+    public Review(String msg, Job reviewedJob, boolean like, Company company,  User reviewer) {
         this.msg = msg;
         this.reviewedJob = reviewedJob;
         this.likes = like;
+        this.company = company;
+        this.reviewer = reviewer;
+    }
+    public Review(String msg, Job reviewedJob, boolean like,Student student, User reviewer) {
+        this.msg = msg;
+        this.reviewedJob = reviewedJob;
+        this.likes = like;
+        this.student = student;
+        this.reviewer = reviewer;
     }
 
     public long getId() {
@@ -49,12 +64,28 @@ public class Review {
         this.reviewedJob = reviewedJob;
     }
 
-    public boolean isLike() {
+    public boolean isLikes() {
         return likes;
     }
 
-    public void setLike(boolean like) {
-        this.likes = like;
+    public void setLikes(boolean likes) {
+        this.likes = likes;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public LocalDateTime getRegDate() {
