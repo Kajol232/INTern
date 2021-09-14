@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface StudentRepository extends CrudRepository<Student, Long> {
     Student findStudentsByEmail(String email);
-    Student findByUserId(long userId);
     boolean existsByEmail(String email);
 
 

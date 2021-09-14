@@ -1,55 +1,27 @@
-package com.muhammad.personal.intern.model;
+package com.muhammad.personal.intern.model.dto.requests;
 
+import com.muhammad.personal.intern.model.Institution;
+import com.muhammad.personal.intern.model.Skill;
 import com.muhammad.personal.intern.model.enums.Degree;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import javax.annotation.Nullable;
-import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "students")
-public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @Nullable
-    @OneToOne
-    private User user;
+public class AddStudentDto {
     private String firstName;
     private String lastName;
-    @Column(unique = true)
     private String email;
     private Date dob;
     private char gender;
     private String mobile;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "students_skillset",
-            joinColumns = @JoinColumn(name = "students_id"),
-            inverseJoinColumns = @JoinColumn(name = "skillset_id")
-    )
     private List<Skill> skills;
-    @ManyToOne
     private Institution institution;
     private Degree degree;
-    @Column(length = 1024)
-    private String imageUrl;
     private boolean isApproved;
-    @CreationTimestamp
-    public LocalDateTime dateCreated;
-    @UpdateTimestamp
-    public LocalDateTime dateLastModified;
+    private String imagePath;
 
-    protected Student(){}
-
-    public Student(User user, String firstName, String lastName, String email, Date dob, char gender, String mobile,
-                   List<Skill> skills, Institution institution, Degree degree, String imageUrl,
-                   boolean isApproved) {
-        this.user = user;
+    public AddStudentDto(String firstName, String lastName, String email, Date dob, char gender, String mobile,
+                         List<Skill> skills, Institution institution, Degree degree, boolean isApproved,
+                         String imagePath) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -59,20 +31,8 @@ public class Student {
         this.skills = skills;
         this.institution = institution;
         this.degree = degree;
-        this.imageUrl = imageUrl;
         this.isApproved = isApproved;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+        this.imagePath = imagePath;
     }
 
     public String getFirstName() {
@@ -147,17 +107,6 @@ public class Student {
         this.degree = degree;
     }
 
-    public String getImageUrl() {
-        if(imageUrl == null){
-            return null;
-        }
-        return  "src\\main\\resources\\static\\uploads\\" + getId() + "\\" + imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public boolean isApproved() {
         return isApproved;
     }
@@ -166,20 +115,11 @@ public class Student {
         isApproved = approved;
     }
 
-    public LocalDateTime getDateCreated() {
-        return dateCreated;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public LocalDateTime getDateLastModified() {
-        return dateLastModified;
-    }
-
-    public void setDateLastModified(LocalDateTime dateLastModified) {
-        this.dateLastModified = dateLastModified;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
-

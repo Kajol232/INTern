@@ -4,7 +4,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,9 +32,9 @@ public class User {
     @UpdateTimestamp
     public LocalDateTime dateLastModified;
 
-    protected User(){
-
+    public User(){
     }
+
 
     public User(String username,String email, String password, List<Role> roles,
                 boolean isActive, boolean emailNotification){
