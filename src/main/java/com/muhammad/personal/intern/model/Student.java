@@ -44,7 +44,7 @@ public class Student {
     @UpdateTimestamp
     public LocalDateTime dateLastModified;
 
-    protected Student(){}
+    public Student(){}
 
     public Student(User user, String firstName, String lastName, String email, Date dob, char gender, String mobile,
                    List<Skill> skills, Institution institution, Degree degree, String imageUrl,

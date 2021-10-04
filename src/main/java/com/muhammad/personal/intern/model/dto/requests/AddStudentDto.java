@@ -13,14 +13,14 @@ public class AddStudentDto {
     private Date dob;
     private char gender;
     private String mobile;
-    private List<Skill> skills;
+    private List<String> skills;
     private Institution institution;
     private Degree degree;
     private boolean isApproved;
     private String imagePath;
 
     public AddStudentDto(String firstName, String lastName, String email, Date dob, char gender, String mobile,
-                         List<Skill> skills, Institution institution, Degree degree, boolean isApproved,
+                         List<String> skills, Institution institution, Degree degree, boolean isApproved,
                          String imagePath) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -83,11 +83,11 @@ public class AddStudentDto {
         this.mobile = mobile;
     }
 
-    public List<Skill> getSkills() {
+    public List<String> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<Skill> skills) {
+    public void setSkills(List<String> skills) {
         this.skills = skills;
     }
 

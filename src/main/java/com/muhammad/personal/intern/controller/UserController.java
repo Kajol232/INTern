@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -23,8 +24,8 @@ import java.util.List;
 public class UserController {
     @Autowired
     private JWTProvider provider;
-    @Autowired
-    private JWTFilter filter;
+//    @Autowired
+//    private JWTFilter filter;
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -75,9 +76,14 @@ public class UserController {
             User user = authServices.login(loginDTO);
             if(user != null){
                 String token = provider.generateToken(loginDTO.getEmail());
-                res.addHeader("AUTHORIZATION", "Bearer " + token);
+                Cookie cookie = new Cookie("token", token);
+                cookie.setPath("/");
+                cookie.setSecure(true);
+                cookie.setHttpOnly(true);
+                res.setHeader("Access-Control-Allow-Cred", "true" );
+                res.addCookie(cookie);
                 response.setStatus("00");
-                response.setMessage(token);
+                response.setMessage("Successful login");
                 return ResponseEntity.status(HttpStatus.OK).body(response);            }
         } catch (UnauthorizedException e) {
             response.setStatus(String.valueOf(HttpStatus.UNAUTHORIZED));
